@@ -4,10 +4,10 @@ const Timer = () => {
     const [value, setValue] = useState();
 
     const time = () => {
-      let time = new Date();
-      let hour = time.getHours();
-      let min = time.getMinutes();
-      let sec = time.getSeconds();
+      const time = new Date();
+      const hour = time.getHours();
+      const min = time.getMinutes();
+      const sec = time.getSeconds();
   
       return `${hour} : ${min} : ${sec}`;
     }

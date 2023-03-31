@@ -12,8 +12,9 @@ const DescriptionPopup = () => {
           isOpen && <Modal handleOnClose={hidePopup} isOpen={isOpen}>
           <div className="jumbotron jumbotron-fluid p-3 p-xl-5">
               <div className="container">
-                  <h2 className="display-4">Fluid jumbotron</h2>
-                  <p className="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
+                  <h2 className="display-4">Odpowiedzi do zadania</h2>
+                  <p className="lead">Najwiecej problemów sprawiły mi testy. Robie je po raz pierwszy</p>
+                  <p className="lead">Co mi sprawiło najwiecej radości: lubie sobie postukac w js.</p>
                   <button type="button" className="btn btn-outline-secondary" onClick={hidePopup}>Close</button>
               </div>
           </div>

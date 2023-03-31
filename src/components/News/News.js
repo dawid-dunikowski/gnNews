@@ -38,7 +38,7 @@ const News = () => {
     
     return ( 
         <section>
-          <h2>Lista of news</h2>
+          <h2>Lista niusów</h2>
           {loading && <div className="d-flex justify-content-center">
               <div className="spinner-border" role="status">
                 <span className="visually-hidden">Loading...</span>

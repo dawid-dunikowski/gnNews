@@ -1,6 +1,7 @@
-import {countries} from '../data/dataApp';
+import {countries} from '../config/dataApp';
 import { Link } from 'react-router-dom';
 import {useSelector} from 'react-redux';
+
 const Nav = () => {
   const country = useSelector(store =>store.news.country);
   
@@ -19,7 +20,6 @@ const Nav = () => {
           <div className="list-group list-group-light">
           {list}
           </div>
-          
         </nav>
      );
 }
