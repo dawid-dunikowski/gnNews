@@ -3,15 +3,17 @@ import ReactDOM from 'react-dom';
 
 function Modal({children, isOpen, handleOnClose}) {
   const modalRef = useRef(null);
- 
+
   useEffect(()=>{
     if(!modalRef.current) return;
 
     const {current: modal} = modalRef;
+
     if(isOpen) {
-    
+
       modal.showModal();
-    } else  {
+    } else   {
+
       modal.close();
     }
    
@@ -38,9 +40,17 @@ function Modal({children, isOpen, handleOnClose}) {
     borderRadius: "10px"
   };
 
+  const handleOutSideClick = ({target}) =>{
+    const {current} = modalRef;
+
+    if(target === current) {
+      handleOnClose();
+    }
+  }
+
   return ReactDOM.createPortal ( 
     ( 
-    <dialog  ref={modalRef} style={modalStyle}>
+    <dialog  ref={modalRef} style={modalStyle} onClick={handleOutSideClick}>
       {children}
     </dialog>
     ),

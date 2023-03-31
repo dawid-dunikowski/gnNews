@@ -1,22 +1,18 @@
-import React,{useEffect} from 'react';
-import { useDispatch } from 'react-redux';
 import Header from './components/Header';
 import Main from './components/Main';
-import { fetchNews } from './features/newsStore';
+import Nav from './components/Nav';
+import Footer from './components/Footer';
+
 import './App.scss';
 
 function App() {
 
-  const dispatch = useDispatch();
-
-  useEffect(()=>{
-    dispatch(fetchNews());
-
-  },[]);
   return (
     <div className="App">
       <Header/>
       <Main/>
+      <Nav/>
+      <Footer/>
     </div>
   );
 }
