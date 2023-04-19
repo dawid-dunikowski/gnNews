@@ -1,61 +1,51 @@
 import React, { useEffect, useRef } from 'react';
 import ReactDOM from 'react-dom';
 
-function Modal({children, isOpen, handleOnClose}) {
+function Modal({ children, isOpen, handleOnClose }) {
   const modalRef = useRef(null);
 
-  useEffect(()=>{
-    if(!modalRef.current) return;
+  useEffect(() => {
+    const { current: modal } = modalRef;
 
-    const {current: modal} = modalRef;
+    if (!modal) return;
 
-    if(isOpen) {
-
+    if (isOpen) {
       modal.showModal();
-    } else   {
-
+    } else {
       modal.close();
     }
-   
-  },[isOpen]);
 
-  useEffect(()=>{
-    const {current: modal} = modalRef;
-
-    const handleCancel = event => {
+    const handleCancel = (event) => {
       event.preventDefault();
       handleOnClose();
-    }
-   
-    modal.addEventListener('cancel',handleCancel);
+    };
+
+    modal.addEventListener('cancel', handleCancel);
 
     return () => {
-      modal.removeEventListener('cancel',handleCancel)
-    }
-    
-  },[handleOnClose]);
+      modal.removeEventListener('cancel', handleCancel);
+    };
+  }, [isOpen, handleOnClose]);
 
-  const modalStyle = { 
+  const modalStyle = {
     border: 'none',
-    borderRadius: "10px"
+    borderRadius: '10px'
   };
 
-  const handleOutSideClick = ({target}) =>{
-    const {current} = modalRef;
+  const handleOutsideClick = ({ target }) => {
+    const { current } = modalRef;
 
-    if(target === current) {
+    if (target === current) {
       handleOnClose();
     }
-  }
+  };
 
-  return ReactDOM.createPortal ( 
-    ( 
-    <dialog  ref={modalRef} style={modalStyle} onClick={handleOutSideClick}>
+  return ReactDOM.createPortal(
+    <dialog ref={modalRef} style={modalStyle} onClick={handleOutsideClick}>
       {children}
-    </dialog>
-    ),
+    </dialog>,
     document.body
-   );
+  );
 }
- 
+
 export default Modal;
