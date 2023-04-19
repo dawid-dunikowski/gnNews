@@ -7,7 +7,6 @@ const initialState = {
   news: [],
   viewGridNews: true,
   country: '',
-  count: 0,
   error: '',
 };
 
@@ -60,7 +59,6 @@ const newsSlice = createSlice({
     builder.addCase(fetchNews.fulfilled, (state, action) => {
       state.loading = false;
       state.news = action.payload.articles;
-      state.count = action.payload.articles.length;
       state.error = '';
     });
     // Reducer to handle the rejected state after fetching news
@@ -77,7 +75,6 @@ const newsSlice = createSlice({
     builder.addCase(fetchCountryNews.fulfilled, (state, action) => {
       state.loading = false;
       state.news = action.payload.articles;
-      state.count = action.payload.articles.length;
       state.country = '';
       state.error = '';
     });
