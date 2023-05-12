@@ -14,12 +14,10 @@ const initialState = {
 export const fetchNews = createAsyncThunk(
   'news/fetchNews',
   async (val = 'a') => {
-    try {
+
       const response = await fetch(`https://newsapi.org/v2/everything?q=${val}&pageSize=18&sortBy=publishedAt&apiKey=${key}`);
       return response.json();
-    } catch (error) {
-      throw new Error(error.message);
-    }
+    
   }
 );
 
@@ -27,12 +25,8 @@ export const fetchNews = createAsyncThunk(
 export const fetchCountryNews = createAsyncThunk(
   'news/fetchCountryNews',
   async (val = 'pl') => {
-    try {
       const response = await fetch(`https://newsapi.org/v2/top-headlines?country=${val}&apiKey=${key}`);
       return response.json();
-    } catch (error) {
-      throw new Error(error.message);
-    }
   }
 );
 
@@ -59,12 +53,10 @@ const newsSlice = createSlice({
     builder.addCase(fetchNews.fulfilled, (state, action) => {
       state.loading = false;
       state.news = action.payload.articles;
-      state.error = '';
     });
     // Reducer to handle the rejected state after fetching news
     builder.addCase(fetchNews.rejected, (state, action) => {
       state.loading = false;
-      state.news = [];
       state.error = action.error.message;
     });
     // Reducer to handle the pending state while fetching country news
@@ -75,13 +67,10 @@ const newsSlice = createSlice({
     builder.addCase(fetchCountryNews.fulfilled, (state, action) => {
       state.loading = false;
       state.news = action.payload.articles;
-      state.country = '';
-      state.error = '';
     });
     // Reducer to handle the rejected state after fetching country news
     builder.addCase(fetchCountryNews.rejected, (state, action) => {
       state.loading = false;
-      state.news = [];
       state.error = action.error.message;
     });
   },
