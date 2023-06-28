@@ -1,5 +1,4 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { key } from '../config/dataApp';
 
 // Initial state of the news slice
 const initialState = {
@@ -11,13 +10,17 @@ const initialState = {
 };
 
 // Async thunk to fetch news from NewsAPI with a given query
+const baseUrl = process.env.REACT_APP_BASE_URL;
+const apiPathFetchNews = process.env.REACT_APP_API_PATH_EVERYTHING;
+const apiPathFetchCountryNews = process.env.REACT_APP_API_PATH_TOP_HANDLES
+const key = process.env.REACT_APP_KEY;
+
 export const fetchNews = createAsyncThunk(
   'news/fetchNews',
   async (val = 'a') => {
 
-      const response = await fetch(`https://newsapi.org/v2/everything?q=${val}&pageSize=18&sortBy=publishedAt&apiKey=${key}`);
+      const response = await fetch(`${baseUrl}${apiPathFetchNews}?q=${val}&pageSize=18&sortBy=publishedAt&apiKey=${key}`);
       return response.json();
-    
   }
 );
 
@@ -25,7 +28,7 @@ export const fetchNews = createAsyncThunk(
 export const fetchCountryNews = createAsyncThunk(
   'news/fetchCountryNews',
   async (val = 'pl') => {
-      const response = await fetch(`https://newsapi.org/v2/top-headlines?country=${val}&apiKey=${key}`);
+      const response = await fetch(`${baseUrl}${apiPathFetchCountryNews}?country=${val}&apiKey=${key}`);
       return response.json();
   }
 );
